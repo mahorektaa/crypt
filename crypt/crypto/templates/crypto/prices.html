@@ -1,0 +1,61 @@
+{% extends 'crypto/base.html' %}
+
+{% block content %}
+
+    {% if notfound %}
+        <div class="container mt-4">
+            <h1>Crypto Price Search</h1>
+            <p>Welcome to the Crypto Price Search page, your one-stop destination for real-time cryptocurrency price information. Whether you're an investor, trader, or simply curious about the world of digital assets, our comprehensive price search tool has you covered.</p>
+
+            <h2>Why Monitor Crypto Prices?</h2>
+            <p>Staying informed about cryptocurrency prices is essential for several reasons:</p>
+            <ol>
+                <li><strong>Informed Decision Making:</strong> For investors, accurate and up-to-date price data is the foundation of sound decision-making. Make informed choices about buying, selling, or holding your favorite cryptocurrencies.</li>
+                <li><strong>Market Insights:</strong> Tracking price trends allows you to gain valuable insights into the crypto market's behavior. Understand market sentiment, identify potential opportunities, and stay ahead of market movements.</li>
+                <li><strong>Trading Strategies:</strong> Traders rely on real-time price data to execute successful trading strategies. Whether you're a day trader, swing trader, or long-term investor, our price search tool provides the data you need.</li>
+                <li><strong>Community Engagement:</strong> Cryptocurrency prices often reflect broader community sentiments and reactions to news and events. Stay connected to the pulse of the crypto community by monitoring price changes.</li>
+            </ol>
+
+            <h3>Key Features of Our Price Search Tool</h3>
+            <ul>
+                <li><strong>Real-Time Prices:</strong> Stay up-to-date with live price updates for a wide range of cryptocurrencies. Our data is sourced from reputable exchanges, ensuring accuracy and reliability.</li>
+                <li><strong>Interactive Charts:</strong> Visualize price movements over different timeframes with interactive charts. Analyze historical data, identify patterns, and make data-driven decisions.</li>
+                <li><strong>Price Alerts:</strong> Set custom price alerts to receive notifications when a specific cryptocurrency reaches your desired price point. Never miss out on important price movements again.</li>
+                <li><strong>Historical Data:</strong> Explore historical price data to understand how a cryptocurrency has performed over time. Compare price changes over various intervals to gain a comprehensive view.</li>
+                <li><strong>Currency Conversion:</strong> Easily switch between different fiat currencies to see how cryptocurrency prices translate into your preferred currency.</li>
+            </ul>
+
+            <h3>Disclaimer</h3>
+            <p>Please note that cryptocurrency prices are highly volatile and can change rapidly. The information provided on this page is for informational purposes only and should not be considered as financial advice. Always do your own research and consult a qualified financial professional before making investment decisions.</p>
+
+            <p>Start exploring cryptocurrency prices now and make more informed choices in the ever-evolving world of blockchain and digital assets!</p>
+        </div>
+    {% else %}
+    <div class="container mt-4">
+        {% if crypto.Response %}
+         <h2>Sorry, {{ quote }} doesn't exists. Please Try Again with Valid Symbol.</h2>
+        {% endif %}
+    </div>
+        
+        {% for key, value in crypto.DISPLAY.items %}
+            <div class="container mt-4">
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="jumbotron bg-light text-black">
+                            <h1 class="display-4">{{ key }}</h1>
+                            <p><strong>Name:</strong> {{ key }}</p>
+                            <p><strong>Price:</strong> {{ value.USD.PRICE }}</p>
+                            <p><strong>24 hr High:</strong> {{ value.USD.HIGHDAY }}</p>
+                            <p><strong>24 hr Low:</strong> {{ value.USD.LOWDAY }}</p>
+                            <p><strong>Market Cap:</strong> {{ value.USD.MKTCAP }}</p>
+                            <p><strong>Open Day:</strong> {{ value.USD.OPENDAY }}</p>
+                            <p><strong>Change Pct Day:</strong> {{ value.USD.CHANGEPCTDAY }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
